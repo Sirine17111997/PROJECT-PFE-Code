@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason__c</fullName>
+    <externalId>false</externalId>
+    <label>Reason</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Holiday</fullName>
+                <default>false</default>
+                <label>Holiday</label>
+            </value>
+            <value>
+                <fullName>Overtime compensation</fullName><!-- compensation des heures supplémentaires  -->
+                <default>false</default>
+                <label>Overtime compensation</label>
+            </value>
+            <value>
+                <fullName>Training</fullName><!-- formation-->
+                <default>false</default>
+                <label>Training</label>
+            </value>
+            <value>
+                <fullName>Maternity leave</fullName><!-- Congé de maternité-->
+                <default>false</default>
+                <label>Maternity leave</label>
+            </value>
+            <value>
+                <fullName>Special leave (paid)</fullName><!-- Congé spécial (payé)-->
+                <default>false</default>
+                <label>Special leave (paid)</label>
+            </value>
+            <value>
+                <fullName>Special leave (unpaid)</fullName><!-- Congé spécial (non payé)-->
+                <default>false</default>
+                <label>Special leave (unpaid)</label>
+            </value>
+            <value>
+                <fullName>disease</fullName><!-- maladie-->
+                <default>false</default>
+                <label>disease</label>
+            </value>
+            <value>
+                <fullName>No reason</fullName>
+                <default>false</default>
+                <label>No reason</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
