@@ -93,8 +93,9 @@ public with sharing class EventsAPI{
 	public static List<Absence__c> getAllAbsences(){
 		List<Absence__c> lstAbsences = [SELECT Id, StartDate__c, EndDate__c, Reason__c, Approval__c, Certificate__c, AbsenceManager__c, Note__c, Workdays__c, DangerToEmployees__c
 		                                FROM Absence__c];
+								
 
-		return lstAbsences;
+		return  lstAbsences; 
 	}
 
 	/*

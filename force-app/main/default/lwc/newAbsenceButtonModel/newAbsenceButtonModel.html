@@ -1,0 +1,43 @@
+<template>
+    <!-- lightning button for open modal window -->
+   <lightning-card>
+   <lightning-button variant="brand-outline"
+   label="New Absence"
+   title="New Absence"
+   onclick={openModal}
+   slot="actions"
+   class="slds-m-left_x-small"></lightning-button>
+   <c-absence-for-approval></c-absence-for-approval><!--OK-->
+
+   </lightning-card>
+   <!-- modal start -->        
+   <template if:true={bShowModal}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+       <div class="slds-modal__container">
+          <!-- modal header start -->
+          <header class="slds-modal__header">
+            <lightning-button-icon icon-name="action:close" class="slds-float_right" onclick={closeModal}
+            alternative-text="close"></lightning-button-icon>
+          <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Create new Absence</h2>
+             
+          </header>
+          <!-- modal body start -->
+          <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <lightning-record-form
+            object-api-name={objectApiName}
+            fields={fields}
+            onsuccess={handleSuccess}>
+          </lightning-record-form>
+          </div>
+          <!-- modal footer start-->
+          <footer class="slds-modal__footer">
+            <lightning-button variant="neutral" label="Close" title="Close" onclick={closeModal}
+               class="slds-m-left_x-small">
+              </lightning-button>
+           </footer>
+       </div>
+    </section>
+  </template>
+ <!-- modal end -->
+    
+</template>

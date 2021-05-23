@@ -1,0 +1,36 @@
+<template>
+    <template if:true={isAbsenceItemMenu}>
+        
+        <lightning-layout horizontalalign="spread" multiplerows="true">
+        
+            <lightning-layout-item flexibility="grow" size="6" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px;" >
+                <c-calendar-wrapper></c-calendar-wrapper>
+
+
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="grow" size="6" mediumdevicesize="10" largedevicesize="10" style="margin-left:6px;">
+                <c-new-absence-button-model></c-new-absence-button-model>
+                <lightning-layout-item padding="around-small" style="margin-left:6px" >
+                <c-listofabsences></c-listofabsences>
+                </lightning-layout-item>
+
+
+            </lightning-layout-item>
+
+       </lightning-layout>
+       
+    </template>
+    <template if:true={isEquipmentItemMenu}>
+        <p>The Equipment Page is Under Construction...</p>
+    </template>
+    <template if:true={isEmploymentItemMenu}>
+        <p>The Employment Page is Under Construction...</p>
+    </template>
+    <template if:true={isJobsItemMenu}>
+        <p>The Jobs Page is Under Construction...</p>
+    </template>
+    <template if:true={isSetupItemMenu}>
+        <p>The Setup Page is Under Construction...</p>
+    </template>
+  
+</template>

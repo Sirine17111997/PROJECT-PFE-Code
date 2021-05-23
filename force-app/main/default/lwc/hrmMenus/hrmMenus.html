@@ -1,0 +1,42 @@
+<template>
+    <article class="slds-card">
+    <div class="slds-p-around_medium lgc-bg">
+    
+        <lightning-vertical-navigation selected-item="absences"  onselect={handleSelectItemMenu} class="navigation" >
+            <lightning-vertical-navigation-section label="HRM Menu" >
+                <lightning-vertical-navigation-item-icon
+                    label="Absences"
+                    name="absences"
+                    icon-name="standard:user">
+                </lightning-vertical-navigation-item-icon>
+
+                <lightning-vertical-navigation-item-icon
+                    label="Employment"
+                    name="employment"
+                    icon-name="utility:clock">
+                </lightning-vertical-navigation-item-icon>
+
+                <lightning-vertical-navigation-item-icon
+                    label="Equipment"
+                    name="equipment"
+                    icon-name="standard:employee_asset">
+                </lightning-vertical-navigation-item-icon>
+
+                <lightning-vertical-navigation-item-icon
+                    label="Jobs"
+                    name="jobs"
+                    icon-name="utility:groups">
+                </lightning-vertical-navigation-item-icon>
+
+                <lightning-vertical-navigation-item-icon
+                    label="Setup"
+                    name="setup"
+                    icon-name="custom:custom67">
+
+                </lightning-vertical-navigation-item-icon>
+            </lightning-vertical-navigation-section>
+        </lightning-vertical-navigation>
+     </div>
+    
+    </article>
+</template>

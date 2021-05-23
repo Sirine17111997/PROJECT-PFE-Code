@@ -1,0 +1,56 @@
+<template>
+    <div class="slds-card">
+    
+        <lightning-layout-item>
+            <div class="slds-card__body slds-card__body_inner">
+                <template if:true={toggleCalendar}>
+                    <c-full-calendar onrecordchange={handleOnRecordChange}></c-full-calendar>
+                </template>
+            </div>
+        </lightning-layout-item>
+       
+       <footer class="slds-card__footer">
+
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-3">
+                    <!-- toggle show/hide calendar button -->
+                    <div class="slds-form-element">
+                        <label class="slds-checkbox_toggle slds-grid">
+                            <span class="slds-form-element__label slds-m-bottom_none">Show/Hide Calendar</span>
+                            <input type="checkbox" name="checkbox-toggle-44" value="checkbox-toggle-44"
+                                aria-describedby="checkbox-toggle-44" onclick={handleToggleCalendar} />
+                            <span id="checkbox-toggle-44" class="slds-checkbox_faux_container" aria-live="assertive">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-checkbox_on"></span>
+                                <span class="slds-checkbox_off"></span>
+                            </span>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+
+                    <!-- toggle show/hide weekends  -->
+                    <div class="slds-form-element">
+                        <label class="slds-checkbox_toggle slds-grid">
+                            <span class="slds-form-element__label slds-m-bottom_none">Show/Hide Weekend</span>
+                            <input type="checkbox" name="checkbox-toggle-45" value="checkbox-toggle-45"
+                                aria-describedby="checkbox-toggle-44" onclick={handleToggleCalendarWeekend} />
+                            <span id="checkbox-toggle-45" class="slds-checkbox_faux_container" aria-live="assertive">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-checkbox_on"></span>
+                                <span class="slds-checkbox_off"></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </footer>
+
+    </div>
+
+</template>

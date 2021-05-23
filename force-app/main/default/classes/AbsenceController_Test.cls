@@ -23,32 +23,33 @@ public class AbsenceController_Test {
              insert e;
       	 AbsenceManager__c abm = new AbsenceManager__c(Name='test AbsenceManager',Employee__c=e.Id);
               insert abm;
-         Absence__c        ab=new Absence__c(AbsenceManager__c=abm.Id,Approval__c='Ausstehend');
+         Absence__c        ab=new Absence__c(AbsenceManager__c=abm.Id,Approval__c='Pending');
               insert ab;
              
          }
     }
     
        static testMethod void test_Items_AbsenceManagerWrapper(){
-		AbsenceController.Items itm=new AbsenceController.Items();
+		treedata.Items itm=new treedata.Items();
     		itm.name = 'test item name';
 			itm.label ='test item label';
 			itm.expanded=true;
 			itm.disabled=true;
-		AbsenceController.AbsenceManagerWrapper amw=new AbsenceController.AbsenceManagerWrapper();
+		treedata.AbsenceManagerWrapper amw=new treedata.AbsenceManagerWrapper();
             amw.name='test AbsenceManagerWrapper name ';
 			amw.label='test AbsenceManagerWrapper label';
 			amw.expanded=true;
 			amw.disabled=true;
-            amw.items=new List<AbsenceController.Items>{itm};   
+            amw.items=new List<treedata.Items>{itm};   
                   system.assertEquals(amw!=null,true);            
                }
     static testMethod void test_getTreeData(){
-    	   List<AbsenceController.AbsenceManagerWrapper> result= AbsenceController.getTreeData();
+    	   List<treedata.AbsenceManagerWrapper> result= treedata.getTreeData();
     		system.assertEquals(result.size(),1);
     }
         static testMethod void test_getAbsencesForApproval(){
     	   List<Absence__c> result= AbsenceController.getAbsencesForApproval();
     		system.assertEquals(result.size(),1);
     }
+	
 }
