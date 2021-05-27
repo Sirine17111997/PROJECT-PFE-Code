@@ -18,6 +18,7 @@ openModal(record) {
 @api
     closeModal(event) {
     this.showelement = false;
+    location.reload();
       }
     
 handleSuccess(event) {
@@ -31,16 +32,19 @@ handleSuccess(event) {
             variant: 'success',
           }),
         );
-    
+       
+        
+       
+
         //dispatch created event
         let customEvent = new CustomEvent('created', {
           detail: null
         })
         this.dispatchEvent(customEvent);
+        
       }
     
-initializeObject() {
-      }
+
 
 
 

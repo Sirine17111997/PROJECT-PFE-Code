@@ -26,45 +26,49 @@ export default class NewAbsenceButtonModel extends LightningElement {
         publish(this.messageContext, SampleMC , payload);
     }
    // The record page provides objectApiName
-    objectApiName = Absence__c;
-    fields = 
-    [Name,
-    StartDate__c,
-    endDate__c,
-    Workdays__c,
-    approval__c,
-    Reason__c,
-    Certificate__c,
-    DangerToEmployees__c,
-    AbsenceManager__c
-];
-    @track bShowModal = false;
+   
+objectApiName = Absence__c;
+@track showModal = false;
+fields = [
+       Name,
+       StartDate__c,
+       endDate__c,
+       Workdays__c,
+       approval__c,
+       Certificate__c,
+       DangerToEmployees__c,
+       AbsenceManager__c
+   ];
 
-    /* javaScipt functions start */ 
-    openModal() {    
-        // to open modal window set 'bShowModal' tarck value as true
-        this.bShowModal = true;
-    }
- 
-    closeModal() {    
-        // to close modal window set 'bShowModal' tarck value as false
-        this.bShowModal = false;
-    }
-    handleSuccess(event){
-        this.handleAbsencecreated(event.detail.id);
-        this.closeModal();
-        this.showToast("Success", "Absence Created", "success");
 
-    }
-    showToast(title, message, variant) {
-        this.dispatchEvent(
-          new ShowToastEvent({
-            title: title,
-            message: message,
-            variant: variant,
-          })
-        );
-      }
+/* javaScipt functions start */
+openModal() {
+   // to open modal window set 'bShowModal' tarck value as true
+   this.showModal = true;
+}
+
+handleSuccess(event) {
+   //update  calendar: add the new created absence 
+    const evt = new ShowToastEvent({
+        title: "Absence created",
+        message: "Record ID: " + event.detail.id,
+        variant: "success"
+    });
+    this.dispatchEvent(evt);
+    this.closeModal();
+    location.reload();
+
+
+
+}
+   
+
+
+closeModal() {
+   // to close modal window set 'bShowModal' tarck value as false
+   this.showModal = false;
+
+}
 
 
 }

@@ -244,7 +244,9 @@ export default class FullcalendarJStest extends LightningElement {
 
 
   handleRecordsChange(e) {
-    this.dispatchEvent(new CustomEvent('recordchange', {}))
+    this.dispatchEvent(new CustomEvent('recordchange', {}));
+    
+  
   }
 
 }

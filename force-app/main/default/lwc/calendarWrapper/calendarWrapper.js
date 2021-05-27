@@ -19,6 +19,9 @@ export default class CalendarWrapper extends LightningElement {
     
     handleOnRecordChange(e) {
         debugger
+        //reload the current page
+        location.reload();
+       
        
     }
 

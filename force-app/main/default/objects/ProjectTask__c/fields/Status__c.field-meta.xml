@@ -12,9 +12,9 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Backlock</fullName>
+                <fullName>Backlog</fullName>
                 <default>true</default>
-                <label>Backlock</label>
+                <label>Backlog</label>
             </value>
             <value>
                 <fullName>Planned</fullName>

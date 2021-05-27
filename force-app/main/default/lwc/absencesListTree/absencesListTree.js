@@ -72,24 +72,7 @@ export default class AbsencesListTree extends LightningElement {
 
     }
 
-    createMapIdStartDate(data) {
-        data.map(e => e.items).forEach(e => e.forEach(item => {
-            this.mapIdStartDate.set(item.name, item.StartDate)
-        }));
-
-    }
-
-    goToSelectedAbsenceDate(id) {
-        let selectedAbsenceStartDate = this.mapIdStartDate.get(id)
-        this.handleSelectedAbsenceDate(selectedAbsenceStartDate)
-    }
-
-    //  publishing event to full calendar
-    handleSelectedAbsenceDate(d) {
-        const payload = { param: d };
-        publish(this.messageContext, GoToDate, payload);
-    }
-
+    
 
 
 }
