@@ -16,7 +16,7 @@ export default class Durtion extends LightningElement {
     }
     set endTimeString(value) {
         let today = new Date().toISOString().split('T')[0];
-        // this.endTime = new Date(today + 'T' + value);
+        // this.endTims17e = new Date(today + 'T' + value);
         this.endTime = new Date(today + 'T' + value.split('T')[1].substring(0,8));
     }
 
