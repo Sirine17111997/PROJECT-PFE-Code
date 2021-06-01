@@ -1,6 +1,6 @@
 import { LightningElement,api,wire,track } from 'lwc';
 import  getAbsencesForApproval from '@salesforce/apex/AbsenceController.getAbsencesForApproval';
-
+import { updateRecord } from 'lightning/uiRecordApi';
 import Absence__c from '@salesforce/schema/Absence__c';
 import Name from '@salesforce/schema/Absence__c.Name';
 import StartDate__c from '@salesforce/schema/Absence__c.StartDate__c';
@@ -14,6 +14,8 @@ import AbsenceManager__c from '@salesforce/schema/Absence__c.AbsenceManager__c';
 import { deleteRecord } from "lightning/uiRecordApi";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import {refreshApex} from '@salesforce/apex';
+import { getRecord,getRecordNotifyChange } from 'lightning/uiRecordApi';
+import updateAbsenceApproval from '@salesforce/apex/AbsenceController.updateAbsenceApproval';
 
 
 
@@ -38,6 +40,7 @@ export default class AbsenceForApproval extends LightningElement {
     @track certificate = Certificate__c;
     @track Reason = Reason__c;
     @track workdays = Workdays__c;
+    @track showLoadingSpinner = false;
     refreshTable;
     error;
     startdate='StartDate__c';
@@ -52,8 +55,9 @@ export default class AbsenceForApproval extends LightningElement {
             typeAttributes: { rowActions: actions }}
         
     ];
-   
-    @wire(getAbsencesForApproval)
+ @api currentRecordId ;
+
+ @wire(getAbsencesForApproval)
     wiredAbsences(result) {
       this.refreshTable = result;
       if (result.data) {
@@ -83,8 +87,9 @@ export default class AbsenceForApproval extends LightningElement {
         }
     }
 deleteRow(row) {
+        this.showLoadingSpinner = true;
         let id = row["Id"],
-          index = this.findRowIndexById(id);
+        index = this.findRowIndexById(id);
         console.log(index);
        
         if (index !== -1) {
@@ -93,7 +98,8 @@ deleteRow(row) {
               this.data = this.data
                 .slice(0, index)//slice() render an array object
                 .concat(this.data.slice(index + 1));//concat() combines the text of several strings
-              this.showToast("Success", "Absence Rejected", "success");
+              this.showLoadingSpinner = false;
+              this.showToast("Success", "Absence Rejected sucessfully", "success");
                // refreshing table data using refresh apex
              return refreshApex(this.refreshTable);
               
@@ -121,21 +127,50 @@ showRowDetails(row) {
 handleSuccess() {
       return refreshApex(this.refreshTable);
   }
-approveRow(row){
-   // open modal box
-   this.bShowModal = true;
-   this.isEditForm = true;
 
-   // assign record id to the record edit form
-   this.currentRecordId = row.Id;
+ approveRow(currentRow){
+  let currentRecord = [];
+  currentRecord.push(currentRow.Id);
+  this.showLoadingSpinner = true;
+
+  // calling apex class method to delete the selected contact
+  updateAbsenceApproval({ absID : currentRecord })
+      .then( result => {
+
+          this.showLoadingSpinner = false;
+
+          // showing success message
+          this.dispatchEvent(new ShowToastEvent({
+              message: 'Absence approved sucessfully',
+              variant: 'success'
+          }));
+
+          // refreshing table data using refresh apex
+          return refreshApex(this.refreshTable);
+
+      })
+      .catch(error => {
+          this.dispatchEvent(new ShowToastEvent({
+              message: error.message,
+              variant: 'error'
+          }));
+      });
+
+  
+
+ }
+  
+
+   //this.bShowModal = true;
+   //this.isEditForm = true;
+   //this.currentRecordId = this.row.Id;
+
+
 
   
   
     
-}
-approval(){
-  this.approval__c="Approved";
-}
+
 
 closeModal() {    
   // to close modal window set 'bShowModal' tarck value as false

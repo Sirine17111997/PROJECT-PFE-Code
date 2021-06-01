@@ -42,9 +42,9 @@
                 <label>Canceled</label>
             </value>
             <value>
-                <fullName>Overdue</fullName>
+                <fullName>Review</fullName>
                 <default>false</default>
-                <label>Overdue</label>
+                <label>Review</label>
             </value>
         </valueSetDefinition>
     </valueSet>

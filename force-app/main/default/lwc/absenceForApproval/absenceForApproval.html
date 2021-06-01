@@ -1,4 +1,8 @@
 <template>
+    <!-- Spinner -->
+    <div if:true={showLoadingSpinner}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
      <template if:true={error}>
         <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
           <span class="slds-assistive-text">error</span>

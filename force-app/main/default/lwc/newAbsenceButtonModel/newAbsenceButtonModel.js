@@ -35,6 +35,7 @@ fields = [
        endDate__c,
        Workdays__c,
        approval__c,
+       Reason__c,
        Certificate__c,
        DangerToEmployees__c,
        AbsenceManager__c
