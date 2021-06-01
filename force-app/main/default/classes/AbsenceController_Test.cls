@@ -52,4 +52,6 @@ public class AbsenceController_Test {
     		system.assertEquals(result.size(),1);
     }
 	
+		
+	
 }
