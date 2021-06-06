@@ -37,14 +37,24 @@ export default class HrmAbsences extends LightningElement {
                  this.isAbsenceItemMenu=true;
                  this.isEquipmentItemMenu=false;
                  this.isEmploymentItemMenu=false;
+                 this.isItemMenudashboard=false;
                  this.isJobsItemMenu=false;
                  this.isSetupItemMenu =false;
             }break;
+            case 'dashboard':{
+                this.isAbsenceItemMenu=false;
+                this.isItemMenudashboard=true;
+                this.isEquipmentItemMenu=false;
+                this.isEmploymentItemMenu=false;
+                this.isJobsItemMenu=false;
+                this.isSetupItemMenu =false;
+           }break;
             case 'employment':{
                 this.isAbsenceItemMenu=false;
                 this.isEquipmentItemMenu=false;
                 this.isEmploymentItemMenu=true;
                 this.isJobsItemMenu=false;
+                this.isItemMenudashboard=false;
                 this.isSetupItemMenu =false;
             }break;
             case 'equipment':{
@@ -52,6 +62,7 @@ export default class HrmAbsences extends LightningElement {
                 this.isEquipmentItemMenu=true;
                 this.isEmploymentItemMenu=false;
                 this.isJobsItemMenu=false;
+                this.isItemMenudashboard=false;
                 this.isSetupItemMenu =false;
            }break;
            case 'jobs':{
@@ -59,6 +70,7 @@ export default class HrmAbsences extends LightningElement {
                 this.isEquipmentItemMenu=false;
                 this.isEmploymentItemMenu=false;
                 this.isJobsItemMenu=true;
+                this.isItemMenudashboard=false;
                 this.isSetupItemMenu =false;
             }break;
             case 'setup':{
@@ -67,6 +79,7 @@ export default class HrmAbsences extends LightningElement {
                 this.isEmploymentItemMenu=false;
                 this.isJobsItemMenu=false;
                 this.isSetupItemMenu =true;
+                this.isItemMenudashboard=false;
             }break;
 
         }

@@ -8,7 +8,7 @@ public with sharing class treedata {
         for( AbsenceManager__c a : accs){
             AbsenceManagerWrapper aWraper = new AbsenceManagerWrapper() ; 
             aWraper.name ='E'+a.ID;
-            aWraper.label =a.employee__r.Name ;
+            aWraper.label =a.Name ;//employee__r
             aWraper.expanded =true ;
             aWraper.disabled = true;
             List<Items> co = new List<Items>(); 
@@ -17,6 +17,7 @@ public with sharing class treedata {
                 conWrapp.name =c.ID ;
                 conWrapp.label =c.Name ;
                 conWrapp.StartDate=String.valueOf(c.StartDate__c); 
+                conWrapp.EndDate=String.valueOf(c.EndDate__c); 
                 conWrapp.expanded =true ;
                 aWraper.disabled = false;
                 co.add(conWrapp);
@@ -51,7 +52,8 @@ public with sharing class treedata {
         public Boolean disabled{get;set;}
         @AuraEnabled
         public String StartDate{get;set;}
+        @AuraEnabled
+        public String EndDate{get;set;}
     }
-    
 }
 

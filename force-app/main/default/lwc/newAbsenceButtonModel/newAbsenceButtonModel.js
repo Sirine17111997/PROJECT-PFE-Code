@@ -1,4 +1,4 @@
-import { LightningElement,track,wire } from 'lwc';
+import { LightningElement,track,wire,api } from 'lwc';
 import Absence__c from '@salesforce/schema/Absence__c';
 import Name from '@salesforce/schema/Absence__c.Name';
 import StartDate__c from '@salesforce/schema/Absence__c.StartDate__c';
@@ -11,6 +11,7 @@ import AbsenceManager__c from '@salesforce/schema/Absence__c.AbsenceManager__c';
 import Reason__c from '@salesforce/schema/Absence__c.Reason__c';
 import { publish, MessageContext } from 'lightning/messageService';
 import SampleMC from '@salesforce/messageChannel/SampleMC__c';
+
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 
@@ -57,7 +58,9 @@ handleSuccess(event) {
     });
     this.dispatchEvent(evt);
     this.closeModal();
-    location.reload();
+    this.template.querySelector('c-absence-for-approval').handleSuccess();
+    
+
 
 
 
@@ -68,7 +71,7 @@ handleSuccess(event) {
 closeModal() {
    // to close modal window set 'bShowModal' tarck value as false
    this.showModal = false;
-
+    
 }
 
 

@@ -14,7 +14,6 @@ import AbsenceManager__c from '@salesforce/schema/Absence__c.AbsenceManager__c';
 import { deleteRecord } from "lightning/uiRecordApi";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import {refreshApex} from '@salesforce/apex';
-import { getRecord,getRecordNotifyChange } from 'lightning/uiRecordApi';
 import updateAbsenceApproval from '@salesforce/apex/AbsenceController.updateAbsenceApproval';
 
 
@@ -34,8 +33,7 @@ export default class AbsenceForApproval extends LightningElement {
     @track columns;
     @track error;
     @track currentRecordId;
-    @track bShowModal = false;
-    @track isEditForm = false;
+  
     @track record = {};   
     @track certificate = Certificate__c;
     @track Reason = Reason__c;
@@ -44,7 +42,7 @@ export default class AbsenceForApproval extends LightningElement {
     refreshTable;
     error;
     startdate='StartDate__c';
-    Enddate='EndDate__c'
+    Enddate='EndDate__c';
    
     columns = [
    
@@ -55,7 +53,7 @@ export default class AbsenceForApproval extends LightningElement {
             typeAttributes: { rowActions: actions }}
         
     ];
- @api currentRecordId ;
+
 
  @wire(getAbsencesForApproval)
     wiredAbsences(result) {
@@ -122,18 +120,22 @@ findRowIndexById(id) {
         return ret;
     }
 showRowDetails(row) {
+       
         this.record = row;
+        
     }
+@api
 handleSuccess() {
       return refreshApex(this.refreshTable);
   }
 
  approveRow(currentRow){
+  this.showLoadingSpinner = true;
   let currentRecord = [];
   currentRecord.push(currentRow.Id);
-  this.showLoadingSpinner = true;
+ 
 
-  // calling apex class method to delete the selected contact
+  // calling apex class method to update the pending absences
   updateAbsenceApproval({ absID : currentRecord })
       .then( result => {
 
@@ -160,47 +162,6 @@ handleSuccess() {
 
  }
   
-
-   //this.bShowModal = true;
-   //this.isEditForm = true;
-   //this.currentRecordId = this.row.Id;
-
-
-
-  
-  
-    
-
-
-closeModal() {    
-  // to close modal window set 'bShowModal' tarck value as false
-  this.bShowModal = false;
-}
-
-  // handleing record edit form submit
-  handleSubmit(event) {
-    // prevending default type sumbit of record edit form
-    event.preventDefault();
-
-    // querying the record edit form and submiting fields to form
-    this.template.querySelector('lightning-record-edit-form').submit(event.detail.fields);
-
-    // closing modal
-    this.bShowModal = false;
-
-    // showing success message
-    this.dispatchEvent(new ShowToastEvent({
-        title: 'Success!!',
-        message: ' Absence approved Successfully!!.',
-        variant: 'success'
-    }),);
-
-}
-
-
-closeModal() {
-  this.bShowModal = false;
-}
 
 showToast(title, message, variant) {
     this.dispatchEvent(

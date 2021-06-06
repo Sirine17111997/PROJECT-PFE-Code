@@ -4,28 +4,26 @@
         <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
     </div>
      <template if:true={error}>
-        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
-          <span class="slds-assistive-text">error</span>
+        
+          <span>error</span>
           <p>{error}</p>
-        </div>
+        
       </template>
       <!-- Data table  -->
-    <template if:true={data}>
+   
         <lightning-datatable
         key-field="id"
-        title="Absences For Approval"
         hide-checkbox-column
-        show-row-number-column
         data={data}
         columns={columns}
         onrowaction={handleRowAction}
-        >
+        show-row-number-column="true"  >
         </lightning-datatable>
     
         
-    </template>
+    
    
-    <div class="slds-m-around--medium" style="width: 30rem;">
+    <div class="slds-m-around_medium" style="width: 30rem;">
         <article class="slds-tile">
             <h3 class="slds-tile__title slds-truncate" title="Record details"><a href="javascript:void(0);">Absence details</a></h3>
             <div class="slds-tile__detail">
@@ -38,49 +36,10 @@
                     <dd class="slds-item_detail slds-truncate">{record.Reason__c}</dd>
                     <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Certificate">Certificate:</dt>
                     <dd class="slds-item_detail slds-truncate">{record.Certificate__c}</dd>
+               
+                    
                 </dl>
             </div>
         </article>
-        
-    </div>
-    <!--showing record edit form -->
-     <!-- modal start -->        
-   <template if:true={bShowModal}>
-    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
-       <div class="slds-modal__container">
-          <!-- modal header start -->
-          <header class="slds-modal__header">
-            <lightning-button-icon icon-name="action:close" class="slds-float_right" onclick={closeModal}
-            alternative-text="close"></lightning-button-icon>
-          <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate" if:true={isEditForm}>Approve Absence</h2>
-            </header>
-       <div if:true={isEditForm} class="slds-theme_default">
-        <lightning-record-edit-form layout-type="Full" record-id={currentRecordId} object-api-name="Absence__c" onsubmit={handleSubmit} onsuccess={handleSuccess}>
-            <lightning-input-field field-name="Approval__c" ></lightning-input-field>
-           
-            
-            <div style="text-align:center;">
-                <lightning-button class="slds-m-top_small"
-                                  variant="brand"
-                                  type="submit"
-                                  name="update"
-                                  label="Approve absence"></lightning-button>
-            </div>
-        </lightning-record-edit-form>
-    </div>
-    <!-- modal footer start-->
-    <footer class="slds-modal__footer" if:false={isEditForm}>
-        <lightning-button variant="brand"
-                          label="Close"
-                          title="Close"
-                          onclick={closeModal}></lightning-button>
-    </footer>
-    </div>
-    </section>
-    </template>
-    
-        
-    
-
-    
+ </div>
 </template>

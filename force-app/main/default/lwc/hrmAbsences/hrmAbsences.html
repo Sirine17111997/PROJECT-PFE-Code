@@ -3,15 +3,13 @@
         
         <lightning-layout horizontalalign="spread" multiplerows="true">
         
-            <lightning-layout-item flexibility="grow" size="6" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px;" >
+            <lightning-layout-item flexibility="grow" size="6" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:80px;" >
                 <c-calendar-wrapper></c-calendar-wrapper>
-
-
             </lightning-layout-item>
-            <lightning-layout-item flexibility="grow" size="6" mediumdevicesize="10" largedevicesize="10" style="margin-left:6px;">
+            <lightning-layout-item flexibility="grow" size="7" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:70px;">
                 <c-new-absence-button-model></c-new-absence-button-model>
-                <lightning-layout-item padding="around-small" style="margin-left:6px" >
-                <c-listofabsences> </c-listofabsences>
+                <lightning-layout-item  style="margin-left:6px;" >
+                    <c-listofabsences></c-listofabsences>               
                 </lightning-layout-item>
 
 
@@ -19,6 +17,9 @@
 
        </lightning-layout>
        
+    </template>
+    <template if:true={isItemMenudashboard}>
+        <p>The dashboard Page is Under Construction...</p>
     </template>
     <template if:true={isEquipmentItemMenu}>
         <p>The Equipment Page is Under Construction...</p>

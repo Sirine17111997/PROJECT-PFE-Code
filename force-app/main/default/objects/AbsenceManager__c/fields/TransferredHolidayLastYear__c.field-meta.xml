@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>TransferredHolidayLastYear__c</fullName>
     <externalId>false</externalId>
-    <label>Transferred Holiday Last Year</label><!-- jours férré transfrer-->
+    <label>Transferred Holiday Last Year</label>
     <precision>18</precision>
     <required>false</required>
     <scale>0</scale>

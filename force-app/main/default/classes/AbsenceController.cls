@@ -24,6 +24,21 @@ public with sharing class AbsenceController{
 		update absToUpdate;
 	}
    }
+ @AuraEnabled(cacheable = true)
+	public static List<AbsenceManager__c> getAbsencesManager(){
+		List<AbsenceManager__c> absencesManager;
+		absencesManager= [select ID, Name, Email__c
+		            from AbsenceManager__c
+		           ];
+		return absencesManager;
+	}
+@AuraEnabled(cacheable = true)
+	public static List<Absence__c> getAbsences(){
+		List<Absence__c> absences;
+		absences = [select ID, Name, absencemanager__r.employee__r.Name, StartDate__c, EndDate__c, Reason__c, Note__c, Certificate__c, Workdays__c,Approval__c
+		            from Absence__c];
+		return absences;
+	}
 	 
 } 
 	
