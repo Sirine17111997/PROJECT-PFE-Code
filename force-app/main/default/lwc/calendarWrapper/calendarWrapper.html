@@ -1,13 +1,22 @@
 <template>
-    <div class="slds-card">
-    
-        <lightning-layout-item>
-            <div class="slds-card__body slds-card__body_inner">
+    <div class="slds-card" style="height: 625px;">
+       <!-- <div class="slds-card__header slds-grid">
+            <div class="slds-col_bump-left slds-size_6-of-6">
+                <lightning-button variant="brand" label="launchCalendar" onclick={launchCalendar}></lightning-button>
+                <template if:true={toggleCalendar}>
+                   <c-content onvaluechange={hanldeValueChange}>
+                    </c-content>
+                </template>--> 
+            
+            <!-- <div class="slds-col_bump-right  slds-size_2-of-6">
+            </div> -->
+        
+        <div class="slds-card__body slds-card__body_inner">
                 <template if:true={toggleCalendar}>
                     <c-full-calendar onrecordchange={handleOnRecordChange}></c-full-calendar>
                 </template>
-            </div>
-        </lightning-layout-item>
+        </div>
+        
        
        <footer class="slds-card__footer">
 
@@ -30,7 +39,7 @@
                 </div>
                 <div class="slds-col slds-size_1-of-3">
 
-                    <!-- toggle show/hide weekends  -->
+        <!-- toggle show/hide weekends  -->
                     <div class="slds-form-element">
                         <label class="slds-checkbox_toggle slds-grid">
                             <span class="slds-form-element__label slds-m-bottom_none">Show/Hide Weekend</span>

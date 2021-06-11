@@ -1,6 +1,9 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import { loadScript, loadStyle } from 'lightning/platformResourceLoader';
 import FullCalendar from '@salesforce/resourceUrl/FullCalendarJS';
+import getUserHolidays from '@salesforce/apex/EventsAPI.getUserHolidays';
+import getAllAbsences from '@salesforce/apex/EventsAPI.getAllAbsences';
+import getEventsCategories from '@salesforce/apex/EventsAPI.getEventsCategories';
 //Use the Lightning message service functions to communicate over a Lightning message channel(is not a component).
 //Use Lightning message service to communicate across the DOM between lighnting web components.
 //Lightning Message service is a way to communicate between Lightning Web Components (LWC), Aura Components, and, yes, even Visualforce Pages. The new capability is called Lightning Message Service.
@@ -56,6 +59,7 @@ export default class FullcalendarJStest extends LightningElement {
       disconnectedCallback() {
         this.unsubscribeToMessageChannel();
       }
+
       // ----------------------------
       @api currentDate = null;
       //may be loaded from database
@@ -69,16 +73,99 @@ export default class FullcalendarJStest extends LightningElement {
       connectedCallback() {
         // Standard lifecycle hooks used to subscribe and unsubsubscribe to the message channel
         this.subscribeToMessageChannel();
-      
+        this.init_calendar()
       }
-  /////////////////////////////////////////////////////////////
-  
-  /**
-   * @description Standard lifecyle method 'renderedCallback'
-   *              Ensures that the page loads and renders the 
-   *              container before doing anything else
-   */
-  renderedCallback() {
+    
+      init_calendar() {
+        getEventsCategories().then((data) => {
+          console.log(data);
+          //get all values
+          this.initialValues = data.map(x => {
+            return {
+              label: x.label__c,
+              value: x.color__c,
+              selected: x.selected__c
+            }
+          }) || []
+    
+          // preselected values
+          this.preArr = this.initialValues.filter(p => {
+            if (p.selected == true)
+              return p
+          }).map(x => x.value)
+          this.filterEvents(this.preArr)
+        })
+      }
+    
+    
+      //filter displayed events
+      /**
+       * @param {events data} evts 
+       * @param {default date for the calendar} d 
+       */
+      @api
+      filterEvents(evts) {
+        //make sure modals (of edit/create  absence) are hidden 
+        this.showmodal = false;
+        //will take all events Holidays and Absences 
+        let eventsList = []
+        // holidays filling
+        getUserHolidays()
+          .then(result => {
+            console.log('*** getUserHolidays : result');
+            console.table(result);
+    
+            if (result.length > 0) {
+              //get track of holidays 
+              helper.listOfHolidays = [...result]
+              debugger
+              //actual holidays filling
+              result.forEach(o => {
+                eventsList.push({
+                  allDay: true,
+                  start: o.date__c,
+                  end: o.date__c,
+                  title: o.holidayName__c,
+                  editable: false,
+                  color: '#777777',
+                })
+              });
+            }
+      //absence filling
+            getAllAbsences().then(result => {
+              console.log('*** getAllAbsences : result');
+              console.table(result);
+              if (result.length > 0) {
+                result.forEach(o => {
+                  eventsList.push({
+                    id: o.Id,
+                    allDay: true,
+                    start: o.cm_bm__StartDate__c,
+                    end: o.cm_bm__EndDate__c,
+                    title: o.cm_bm__Reason__c,
+                    editable: true,
+                    color: helper.getColorByApprovalName(o.cm_bm__Approval__c)
+                  })
+                });
+              }
+              //filter events list by color 
+              // please use lowercase letters for hex color codes  to avoid confusion     
+              // Events:    approved | pending | rejected  | holiday
+              // Colors:    #7cfc00  | #add8e6 | #ff4500   | #777777
+              console.log("*** before filtering");
+              console.table(eventsList);
+              eventsList = eventsList.filter(evt => evts.includes(evt.color));
+              // eventsList = this.myEventsList.filter(evt => evts.includes(evt.color));
+              //build the calendar with the given eventsList 
+              this.makeCalendar(eventsList);
+            })
+          })
+      }
+    
+      //to make the code readable 
+    
+ ////////////////////////////////////////
+ makeCalendar(eventsList){
     Promise.all([
       loadScript(this, FullCalendar + '/jquery.min.js'),
       loadScript(this, FullCalendar + '/jquery-ui.min.js'),
@@ -167,11 +254,7 @@ export default class FullcalendarJStest extends LightningElement {
           }
           newAbsenceElem.openModal(newAbsence);
         },
-      
-     
-      
-      
-      
+        events: eventsList,
       // weekends: false,
       //same as weekends: false
       dayRender: function (date, cell) {
@@ -195,16 +278,8 @@ export default class FullcalendarJStest extends LightningElement {
      
     });
     
-  })
-
-
-
-  
-  }
-
- 
-  
- //get current date 
+  })}
+//get current date 
   @api
   getCurrentDate() {
     Promise.all([

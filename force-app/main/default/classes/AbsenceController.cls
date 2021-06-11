@@ -10,12 +10,12 @@ public with sharing class AbsenceController{
 	}
  //absencemanager__r.employee__r.Name (relation parent-child) 
  
-@AuraEnabled(cacheable = true)
- public static void updateAbsenceApproval( list<Id> absID){
+@AuraEnabled
+ public static void updateAbsenceApproval(List<Id> absID){
 	List<Absence__c> absToUpdate = new List<Absence__c>();
      for(Id abs : absID){
 		for ( Absence__c a : [ 
-			SELECT  ID, Name, absencemanager__r.employee__r.Name, StartDate__c, EndDate__c, Reason__c, Note__c, Certificate__c, Workdays__c,Approval__c
+			select  ID, Name, absencemanager__r.employee__r.Name, StartDate__c, EndDate__c, Reason__c, Note__c, Certificate__c, Workdays__c,Approval__c
 			from Absence__c WHERE  ID= :abs]) {
           a.Approval__c  = 'Approved';
           absToUpdate.add(a);
@@ -39,6 +39,44 @@ public with sharing class AbsenceController{
 		            from Absence__c];
 		return absences;
 	}
+@AuraEnabled(cacheable=true)
+    public static List<AggregateResult> getAbsenceschart(){
+        return [select COUNT(Name) num, Reason__c , Certificate__c FROM Absence__c WHERE  Approval__c ='Approved' AND StartDate__c>=:system.today() AND StartDate__c<=:system.today()+7 GROUP BY Reason__c,Certificate__c];
+    }
+@AuraEnabled(cacheable=true)
+    public static List<AggregateResult> getAbsencescertif(){
+        return [select COUNT(Name) num,Reason__c  FROM Absence__c WHERE  Approval__c ='Rejected' AND StartDate__c>=:system.today() AND StartDate__c<=:system.today()+7 GROUP BY Reason__c];
+    }
+
+
+@AuraEnabled(cacheable=true)
+public static List<AggregateResult> getabsencepending(){
+return [select COUNT(Name) num , Reason__c FROM Absence__c WHERE  Approval__c ='Pending' AND StartDate__c>=:system.today() AND StartDate__c<=:system.today()+7  GROUP BY Reason__c ];
+	  
+
 	 
-} 
-	
+
+}
+
+
+@AuraEnabled(cacheable=true)
+public static List<AggregateResult> getabsencedanger(){
+return [select COUNT(Name) num , DangerToEmployees__c FROM Absence__c WHERE StartDate__c>=:system.today() AND StartDate__c<=:system.today()+7  GROUP BY DangerToEmployees__c];}
+
+@AuraEnabled
+public static void rejectAbsenceApproval(List<Id> absID){
+	List<Absence__c> absToreject = new List<Absence__c>();
+     for(Id abs : absID){
+		for ( Absence__c a : [ 
+			select  ID, Name, absencemanager__r.employee__r.Name, StartDate__c, EndDate__c, Reason__c, Note__c, Certificate__c, Workdays__c,Approval__c
+			from Absence__c WHERE  ID= :abs]) {
+          a.Approval__c  = 'Rejected';
+          absToreject.add(a);
+}    }
+	if( !absToreject.isEmpty() ) {
+		delete absToreject;
+	}
+}
+
+
+}

@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="Danger To employees of all absences this week" icon-name="utility:graph" class="slds-size_3-of-3" style="width: 2000px; height:1000px;">
+        <template if:true={chartConfiguration}>
+        <div class="chart-container">
+            <c-chart chart-config={chartConfiguration}></c-chart>
+        </div>
+        </template>
+    </lightning-card>
+    
+</template>

@@ -11,10 +11,11 @@ import Certificate__c from '@salesforce/schema/Absence__c.Certificate__c';
 import Reason__c from '@salesforce/schema/Absence__c.Reason__c';
 import DangerToEmployees__c from '@salesforce/schema/Absence__c.DangerToEmployees__c';
 import AbsenceManager__c from '@salesforce/schema/Absence__c.AbsenceManager__c';
-import { deleteRecord } from "lightning/uiRecordApi";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import {refreshApex} from '@salesforce/apex';
 import updateAbsenceApproval from '@salesforce/apex/AbsenceController.updateAbsenceApproval';
+import rejectAbsenceApproval from '@salesforce/apex/AbsenceController.rejectAbsenceApproval';
+
 
 
 
@@ -40,7 +41,7 @@ export default class AbsenceForApproval extends LightningElement {
     @track workdays = Workdays__c;
     @track showLoadingSpinner = false;
     refreshTable;
-    error;
+  
     startdate='StartDate__c';
     Enddate='EndDate__c';
    
@@ -55,7 +56,7 @@ export default class AbsenceForApproval extends LightningElement {
     ];
 
 
- @wire(getAbsencesForApproval)
+@wire(getAbsencesForApproval)
     wiredAbsences(result) {
       this.refreshTable = result;
       if (result.data) {
@@ -67,7 +68,7 @@ export default class AbsenceForApproval extends LightningElement {
           this.data = undefined;
       }
   }
-    handleRowAction(event) {
+  handleRowAction(event) {
         const actionName = event.detail.action.name;
         const row = event.detail.row;
         console.log('Row --> ' + JSON.stringify(row));//JSON.stringify() converts a javascript value to a JSON String 
@@ -76,7 +77,7 @@ export default class AbsenceForApproval extends LightningElement {
                 this.approveRow(row);
             break;
             case 'reject':
-                this.deleteRow(row);
+                this.rejectRow(row);
                 break;
             case 'detail':
                 this.showRowDetails(row);
@@ -84,41 +85,42 @@ export default class AbsenceForApproval extends LightningElement {
             default:
         }
     }
-deleteRow(row) {
-        this.showLoadingSpinner = true;
-        let id = row["Id"],
-        index = this.findRowIndexById(id);
-        console.log(index);
-       
-        if (index !== -1) {
-          deleteRecord(id)
-            .then(() => {
-              this.data = this.data
-                .slice(0, index)//slice() render an array object
-                .concat(this.data.slice(index + 1));//concat() combines the text of several strings
-              this.showLoadingSpinner = false;
-              this.showToast("Success", "Absence Rejected sucessfully", "success");
-               // refreshing table data using refresh apex
-             return refreshApex(this.refreshTable);
-              
-            })
-            .catch((error) => {
-              this.showToast("Error deleting record", error.body.message, "error");
-            });
-        }
-      }
+rejectRow(row){
+  this.showLoadingSpinner = true;
+  let currentRecord = [];
+  currentRecord.push(row.Id);
+ 
 
-findRowIndexById(id) {
-        let ret = -1;
-        this.data.some((row, index) => {
-          if (row.Id === id) {
-            ret = index;
-            return true;
-          }
-          return false;
-        });
-        return ret;
-    }
+  // calling apex class method to update the pending absences
+  rejectAbsenceApproval({ absID : currentRecord })
+      .then(result => {
+
+          this.showLoadingSpinner = false;
+         // showing success message
+          this.dispatchEvent(new ShowToastEvent({
+              title: 'success',
+              message: 'Absence rejected sucessfully',
+              variant: 'success'
+          }));
+
+          // refreshing table data using refresh apex
+          this.handleSuccess();
+        
+
+      })
+      .catch(error => {
+          this.dispatchEvent(new ShowToastEvent({
+              message: error.message,
+              variant: 'error'
+          }));
+      });
+
+  
+
+ 
+        
+
+}
 showRowDetails(row) {
        
         this.record = row;
@@ -129,26 +131,27 @@ handleSuccess() {
       return refreshApex(this.refreshTable);
   }
 
- approveRow(currentRow){
+approveRow(row){
   this.showLoadingSpinner = true;
   let currentRecord = [];
-  currentRecord.push(currentRow.Id);
+  currentRecord.push(row.Id);
  
 
   // calling apex class method to update the pending absences
   updateAbsenceApproval({ absID : currentRecord })
-      .then( result => {
+      .then(result => {
 
           this.showLoadingSpinner = false;
-
-          // showing success message
+         // showing success message
           this.dispatchEvent(new ShowToastEvent({
+              title: 'success',
               message: 'Absence approved sucessfully',
               variant: 'success'
           }));
 
           // refreshing table data using refresh apex
-          return refreshApex(this.refreshTable);
+          this.handleSuccess();
+        
 
       })
       .catch(error => {

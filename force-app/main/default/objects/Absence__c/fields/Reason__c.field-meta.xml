@@ -3,7 +3,7 @@
     <fullName>Reason__c</fullName>
     <externalId>false</externalId>
     <label>Reason</label>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
@@ -15,32 +15,32 @@
                 <label>Holiday</label>
             </value>
             <value>
-                <fullName>Overtime compensation</fullName><!-- compensation des heures supplémentaires  -->
+                <fullName>Overtime compensation</fullName>
                 <default>false</default>
                 <label>Overtime compensation</label>
             </value>
             <value>
-                <fullName>Training</fullName><!-- formation-->
+                <fullName>Training</fullName>
                 <default>false</default>
                 <label>Training</label>
             </value>
             <value>
-                <fullName>Maternity leave</fullName><!-- Congé de maternité-->
+                <fullName>Maternity leave</fullName>
                 <default>false</default>
                 <label>Maternity leave</label>
             </value>
             <value>
-                <fullName>Special leave (paid)</fullName><!-- Congé spécial (payé)-->
+                <fullName>Special leave (paid)</fullName>
                 <default>false</default>
                 <label>Special leave (paid)</label>
             </value>
             <value>
-                <fullName>Special leave (unpaid)</fullName><!-- Congé spécial (non payé)-->
+                <fullName>Special leave (unpaid)</fullName>
                 <default>false</default>
                 <label>Special leave (unpaid)</label>
             </value>
             <value>
-                <fullName>disease</fullName><!-- maladie-->
+                <fullName>disease</fullName>
                 <default>false</default>
                 <label>disease</label>
             </value>

@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title="All Rejected Absences this week " icon-name="utility:chart" style="width: 2000px; height:1000px;">
+        <template if:true={chartConfiguration}>
+            <div class="chart-container">
+            <c-chart chart-config={chartConfiguration}></c-chart>
+           </div>
+        </template>
+    </lightning-card>
+</template>

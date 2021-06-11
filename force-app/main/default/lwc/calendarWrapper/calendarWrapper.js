@@ -6,23 +6,29 @@ export default class CalendarWrapper extends LightningElement {
     @api initval = []
     @track toggleCalendar = true;
 
-    
+    hanldeValueChange(e) {
+        this.reloadCalendar(e);
+    }
+
+    reloadCalendar(e) {
+        let evts = Object.values(e.detail || {}) || []
+        this.template.querySelector('c-full-calendar-js').filterEvents(evts)
+    }
+
     handleToggleCalendar() {
         this.toggleCalendar = !this.toggleCalendar
     }
 
 
     handleToggleCalendarWeekend() {
-        this.template.querySelector('c-full-calendar').toggleWeekend()
+        this.template.querySelector('c-full-calendar-js').toggleWeekend()
     }
 
-    
+    //evts is array of colors
     handleOnRecordChange(e) {
         debugger
-        //reload the current page
-        location.reload();
-       
-       
+        let evts = this.template.querySelector('c-colors-index').svalue
+        this.template.querySelector('c-full-calendar-js').filterEvents(evts)
     }
 
 }
@@ -36,3 +42,6 @@ export default class CalendarWrapper extends LightningElement {
     // ];
     // }
     //#endregion
+
+
+ 

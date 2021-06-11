@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="All Approved Absences this Week" icon-name="utility:metrics" class="slds-size_3-of-3">
+    
+        <template if:true={chartConfiguration}>
+            <div class="chart-container">
+            <c-chart chart-config={chartConfiguration}></c-chart>
+            </div>
+
+        </template>
+  
+    </lightning-card>
+ 
+</template>

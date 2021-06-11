@@ -9,7 +9,6 @@
     <valueSet>
         <valueSetDefinition>
             <sorted>false</sorted>
-            
             <value>
                 <fullName>Approved</fullName>
                 <default>false</default>

@@ -48,7 +48,7 @@ columns =[
        typeAttributes: { rowActions: actions }}
    
    ];
-@track treeItems;
+@track showModal=false;
 @track error;
 pagelinks = [];
 @track page = 1; 
@@ -56,11 +56,11 @@ pagelinks = [];
 @track data = []; 
 @track startingRecord = 1;
 @track endingRecord = 0; 
-@track pageSize = 4; 
+@track pageSize = 5; 
 @track totalRecountCount = 0;
 @track totalPage = 0;
-@track isButtonDisabled=false;
-@track showLoadingSpinner=false
+@track showLoadingSpinner=false;
+@api recordId;
 refreshTable;
 @wire(getAbsences)
 wiregetgetAbsences(result) {
@@ -191,11 +191,20 @@ this.data.some((row, index) => {
 return ret;
 }
 showdetail(row){
-    this.showLoadingSpinner = true;
-    let id = row["Id"]
-    op
+    
+    let id = row["Id"];
+    this.recordId=id;
+    this.showModal=true;
+    
+
 
 }
+closeModal() {
+    // to close modal window set 'bShowModal' tarck value as true
+    this.showModal = false;
+    return refreshApex(this.refreshTable);
+ }
+ 
 
 
 

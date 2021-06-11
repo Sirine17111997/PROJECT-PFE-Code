@@ -1,0 +1,80 @@
+<template>
+    <div class="slds-grid slds-grid--frame slds-grid--vertical"  >
+       <div class="container">
+        <!-- Header -->
+        <header class="header slds-size--1-of-1" role="banner"  >
+          
+          <div class="slds-grid">
+            <div class="stage-left slds-grid slds-size--2-of-12 slds-theme--alt-inverse slds-p-vertical--x-small slds-p-horizontal--medium js-nav-toggle open">
+              <span class="slds-icon__container slds-align-middle">
+                <img class="slds-icon slds-icon--small" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/8005/rows.svg" alt="Toggle Menu" />
+                <span class="slds-assistive-text">Toggle Menu</span>
+              </span>
+            </div>
+            
+          </div>
+          
+        </header>
+      
+        <!-- Stage Container -->
+        <div class="stage-container slds-grid slds-nowrap slds-size--1-of-1">
+      
+          <!-- Stage Left - Navigation -->
+          <nav class="stage-left slds-size--2-of-12 slds-shrink-none slds-scrollable--y slds-theme--alt-inverse slds-p-around_medium lgc-bg">
+      
+            <lightning-vertical-navigation selected-item="absences"  onselect={handleSelectItemMenu} class="navigation ">
+                <lightning-vertical-navigation-section>
+                    <div class="slds-p-bottom_large">
+                    <lightning-vertical-navigation-item-icon  class="myUniqueClass"
+                          label="Absences"
+                          name="absences"
+                          icon-name="standard:user"
+                          size="large" >
+                      </lightning-vertical-navigation-item-icon>
+                    </div>
+                    <div class="slds-p-bottom_large">
+                        <lightning-vertical-navigation-item-icon class="myUniqueClass"
+                            label="Dashboard"
+                            name="dashboard"
+                            icon-name="standard:dashboard">
+                        </lightning-vertical-navigation-item-icon>
+                    </div>
+                        <div class="slds-p-bottom_large">
+                        <lightning-vertical-navigation-item-icon class="myUniqueClass"
+                            label="Employment"
+                            name="employment"
+                            icon-name="utility:clock">
+                        </lightning-vertical-navigation-item-icon>
+                       </div>
+                       <div class="slds-p-bottom_large">
+                        <lightning-vertical-navigation-item-icon class="myUniqueClass"
+                            label="Equipment"
+                            name="equipment"
+                            icon-name="standard:employee_asset">
+                        </lightning-vertical-navigation-item-icon>
+                       </div>
+                       <div class="slds-p-bottom_large">
+                        <lightning-vertical-navigation-item-icon class="myUniqueClass"
+                            label="Jobs"
+                            name="jobs"
+                            icon-name="utility:groups">
+                        </lightning-vertical-navigation-item-icon>
+                    </div>
+                    <div class="slds-p-bottom_large">
+                        <lightning-vertical-navigation-item-icon class="myUniqueClass"
+                            label="Setup"
+                            name="setup"
+                            icon-name="custom:custom67">
+                       
+                        </lightning-vertical-navigation-item-icon>
+                    </div>
+                    </lightning-vertical-navigation-section>
+                </lightning-vertical-navigation>
+             
+                
+              </nav>
+            </div>
+</div>          
+</div>
+</template>
+<!-- <div class="slds-p-around_medium lgc-bg"></div>-->
