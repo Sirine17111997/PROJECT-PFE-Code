@@ -4,10 +4,8 @@ import { CurrentPageReference } from 'lightning/navigation';//to create a deep l
 
 export default class HrmAbsences extends LightningElement {
     @track isAbsenceItemMenu=true;
-    @track isEquipmentItemMenu=false;
-    @track isEmploymentItemMenu=false;
-    @track isJobsItemMenu=false;
     @track isSetupItemMenu =false;
+    @track ishelpItemMenu=false;
     @track absenceId ;
     @track isAbsence;
     @track isAbsenceManager;
@@ -35,49 +33,26 @@ export default class HrmAbsences extends LightningElement {
         switch(itemMenuSelected){
             case 'absences':{
                  this.isAbsenceItemMenu=true;
-                 this.isEquipmentItemMenu=false;
-                 this.isEmploymentItemMenu=false;
+                 this.ishelpItemMenu=false;
                  this.isItemMenudashboard=false;
-                 this.isJobsItemMenu=false;
+             
                  this.isSetupItemMenu =false;
             }break;
             case 'dashboard':{
                 this.isAbsenceItemMenu=false;
                 this.isItemMenudashboard=true;
-                this.isEquipmentItemMenu=false;
-                this.isEmploymentItemMenu=false;
-                this.isJobsItemMenu=false;
+                this.ishelpItemMenuu=false;
                 this.isSetupItemMenu =false;
            }break;
-            case 'employment':{
+           case 'help':{
                 this.isAbsenceItemMenu=false;
-                this.isEquipmentItemMenu=false;
-                this.isEmploymentItemMenu=true;
-                this.isJobsItemMenu=false;
-                this.isItemMenudashboard=false;
-                this.isSetupItemMenu =false;
-            }break;
-            case 'equipment':{
-                this.isAbsenceItemMenu=false;
-                this.isEquipmentItemMenu=true;
-                this.isEmploymentItemMenu=false;
-                this.isJobsItemMenu=false;
-                this.isItemMenudashboard=false;
-                this.isSetupItemMenu =false;
-           }break;
-           case 'jobs':{
-                this.isAbsenceItemMenu=false;
-                this.isEquipmentItemMenu=false;
-                this.isEmploymentItemMenu=false;
-                this.isJobsItemMenu=true;
+                this.ishelpItemMenu=true;
                 this.isItemMenudashboard=false;
                 this.isSetupItemMenu =false;
             }break;
             case 'setup':{
                 this.isAbsenceItemMenu=false;
-                this.isEquipmentItemMenu=false;
-                this.isEmploymentItemMenu=false;
-                this.isJobsItemMenu=false;
+                this.ishelpItemMenu=false;
                 this.isSetupItemMenu =true;
                 this.isItemMenudashboard=false;
             }break;

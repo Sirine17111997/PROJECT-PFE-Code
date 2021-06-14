@@ -9,8 +9,11 @@ import Certificate__c from '@salesforce/schema/Absence__c.Certificate__c';
 import DangerToEmployees__c from '@salesforce/schema/Absence__c.DangerToEmployees__c';
 import AbsenceManager__c from '@salesforce/schema/Absence__c.AbsenceManager__c';
 import Reason__c from '@salesforce/schema/Absence__c.Reason__c';
+import Note__c from '@salesforce/schema/Absence__c.Note__c';
+import Email__c from '@salesforce/schema/Absence__c.Email__c';
 import { publish, MessageContext } from 'lightning/messageService';
 import SampleMC from '@salesforce/messageChannel/SampleMC__c';
+
 
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
@@ -38,8 +41,10 @@ fields = [
        approval__c,
        Reason__c,
        Certificate__c,
+       Note__c,
        DangerToEmployees__c,
-       AbsenceManager__c
+       AbsenceManager__c,
+       Email__c
    ];
 
 

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Planned_Budget_including_Subtasks__c</fullName>
+    <fullName>Acceptance_critertion__c</fullName>
     <externalId>false</externalId>
-    <label>Planned Budget including Subtasks</label>
-    <precision>18</precision>
-    <required>false</required>
-    <scale>2</scale>
+    <label>Acceptance critertion</label>
+    <length>32768</length>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
-    <type>Currency</type>
+    <type>Html</type>
+    <visibleLines>25</visibleLines>
 </CustomField>

@@ -140,11 +140,11 @@ export default class FullcalendarJStest extends LightningElement {
                   eventsList.push({
                     id: o.Id,
                     allDay: true,
-                    start: o.cm_bm__StartDate__c,
-                    end: o.cm_bm__EndDate__c,
-                    title: o.cm_bm__Reason__c,
+                    start: o.StartDate__c,
+                    end: o.EndDate__c,
+                    title: o.Reason__c,
                     editable: true,
-                    color: helper.getColorByApprovalName(o.cm_bm__Approval__c)
+                    color: helper.getColorByApprovalName(o.Approval__c)
                   })
                 });
               }
@@ -178,7 +178,7 @@ export default class FullcalendarJStest extends LightningElement {
       
       //  the modal[c-modal-new-absence]   rather than calling  the current component 
       //we have no problem instanciating a new component from one of them
-      let newAbsenceElem = this.template.querySelector('c-modal-new-absence')
+      let newAbsenceElem = this.template.querySelector('c-modal-new-absence');
     
       
       //get the dom element to contain the Full calendar 
@@ -249,9 +249,10 @@ export default class FullcalendarJStest extends LightningElement {
             "Workdays__c": 0,
             "Approval__c": "",
             "Certificate__c": "",
+            "Email__c": "",
             "DangerToEmployees__c": "",
-            "AbsenceManager__c": "",
-          }
+            "AbsenceManager__c": ""
+      }
           newAbsenceElem.openModal(newAbsence);
         },
         events: eventsList,

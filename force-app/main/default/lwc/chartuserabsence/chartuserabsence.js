@@ -29,7 +29,7 @@ export default class Chartuserabsence extends LightningElement {
          {
           label:'Reason',
     
-           backgroundColor: ["#00BFFF",'#98FB98',"#00BFFF","#98FB98",'#FF00FF',"#98FB98"]
+           backgroundColor: ["#00BFFF",'#98FB98',"#00BFFF","#98FB98",'#00BFFF',"#98FB98"]
           ,
           data: chartData,
          },

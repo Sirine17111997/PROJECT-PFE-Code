@@ -31,7 +31,7 @@ export default class Dangeremployeecomponent extends LightningElement {
          {
           label:'',
     
-           backgroundColor: ["#0000FF","#00BFFF"]
+           backgroundColor: ['#FF00FF',"#0000FF","#00BFFF",]
           ,
           data: chartData,
          },

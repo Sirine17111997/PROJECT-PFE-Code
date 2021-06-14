@@ -16,13 +16,13 @@
     
     
               <!-- If you have multiple record types and no default record type
-                   selected then recordtypeid attribute 
+                   selected then recordtypeid attribute p
                   becomes necessary on lightning-recordeditform. -->
               <!-- record-type-id="xxx" -->
-    
+              <lightning-record-form object-api-name={objectApiName} fields={fields} onsuccess={handleSuccess}>
+              </lightning-record-form>
               
-              <lightning-record-edit-form object-api-name="Absence__c" onsuccess={handleSuccess}>
-                <lightning-messages></lightning-messages>
+             <!-- <lightning-record-edit-form object-api-name="Absence__c" onsuccess={handleSuccess}>
                 <lightning-input-field disabled field-name="StartDate__c" value={newAbsenceRecord.StartDate__c}>
                 </lightning-input-field>
                 <lightning-input-field disabled field-name="EndDate__c" value={newAbsenceRecord.EndDate__c}>
@@ -34,9 +34,11 @@
                 <lightning-input-field field-name="Approval__c" value={newAbsenceRecord.Approval__c}>
                 </lightning-input-field>
                 <lightning-input-field field-name="Certificate__c"></lightning-input-field>
+                <lightning-input-field field-name="Email__c"></lightning-input-field>
                 <lightning-input-field field-name="DangerToEmployees__c"></lightning-input-field>
-                <lightning-input-field field-name="AbsenceManager__c"></lightning-input-field> 
-                <!-- buttons save and cancel -->
+                <lightning-input-field field-name="AbsenceManager__c"></lightning-input-field>  
+                < buttons save and cancel -->
+                <footer class="slds-modal__footer">
                 <lightning-button-group class="slds-align_absolute-center">
                   <!-- cancel -->
                   <lightning-button variant="neutral" label="Cancel" title="Cancel and close window" onclick={closeModal}>
@@ -46,7 +48,8 @@
                   </lightning-button>
     
                 </lightning-button-group>
-              </lightning-record-edit-form>
+                </footer>
+              
     
             </div>
             <!-- modal footer -->

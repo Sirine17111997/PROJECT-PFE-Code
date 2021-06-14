@@ -28,7 +28,7 @@ export default class Absencebarcertif extends LightningElement {
         datasets: [
          {
           label: 'All  Absences per Certifcation ',
-          backgroundColor: [ '#98FB98', '#0000FF','#FF00FF','#FFFF00','#98FB98', '#0000FF','#FF00FF'],
+          backgroundColor: [ '#98FB98', '#0000FF','#FF00FF','#FFE4C4','#98FB98', '#0000FF','#FF00FF'],
           
           data: chartData,
          },

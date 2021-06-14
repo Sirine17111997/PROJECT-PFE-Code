@@ -27,8 +27,7 @@ export default class CalendarWrapper extends LightningElement {
     //evts is array of colors
     handleOnRecordChange(e) {
         debugger
-        let evts = this.template.querySelector('c-colors-index').svalue
-        this.template.querySelector('c-full-calendar-js').filterEvents(evts)
+       location.reload();
     }
 
 }

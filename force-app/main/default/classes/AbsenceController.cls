@@ -77,6 +77,9 @@ public static void rejectAbsenceApproval(List<Id> absID){
 		delete absToreject;
 	}
 }
+@AuraEnabled(cacheable=true)
+public static List<AggregateResult> getabsenceManager(){
+	return [select COUNT(id) num , Name FROM AbsenceManager__c GROUP BY Name];}
 
 
 }
