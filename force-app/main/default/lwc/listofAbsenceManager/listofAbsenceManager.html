@@ -1,0 +1,86 @@
+<template>
+  <div style="height:550px;" >
+      <!--With onselect handler-->
+    
+   
+          <!-- Spinner -->
+        <div if:true={showLoadingSpinner}>
+             <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+          </div>
+        
+   
+                 
+       <div class="slds-m-around_medium">
+
+           <lightning-datatable key-field="Id"  
+                                data={data}  
+                                columns={columns}  
+                                hide-checkbox-column="true"  
+                               onrowaction={handleRowAction}>  
+           </lightning-datatable>  
+           </div>
+           
+       
+           <!-- error part-->
+           <div if:true={error}>
+               <p>{error}</p>
+          </div>
+          <div class="slds-m-bottom_small">
+         
+           <!--data part-->
+            <!-- Data table  -->
+    <lightning-layout horizontal-align="space">
+        <lightning-layout-item flexibility="auto">
+            <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler} variant="brand">
+                </lightning-button>
+                </lightning-layout-item>
+           
+            <lightning-layout-item flexibility="auto">
+             <span class="slds-badge slds-badge_lightest"
+             style="margin-right:92px;">
+              Page {page} out of {totalPage}
+           </span>
+                <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right"
+                        onclick={nextHandler} variant="brand"></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+            </div>
+        </div>
+          <!-- modal start -->   
+  <div>
+   <template if:true={showModal}>
+     <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium"
+       aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+       <div class="slds-modal__container">
+         <!-- modal header -->
+         <header class="slds-modal__header">
+           <lightning-button-icon icon-name="utility:close" class="slds-float_right" onclick={closeModal}
+             alternative-text="close"></lightning-button-icon>
+           <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Absence Manager Detail</h2>
+         </header>
+         <!-- modal content -->
+         <div class="acc-container" style="background-color: white; height:350px;">
+       
+                       
+           <lightning-record-form record-id={recordId} object-api-name="AbsenceManager__c" layout-type="Full"
+           mode="view" columns=3>
+          
+             
+                   
+           </lightning-record-form>
+          
+         </div>
+         <!-- modal footer -->
+         <footer class="slds-modal__footer">
+          <lightning-button variant="neutral" label="Close" title="Close" onclick={closeModal}
+             class="slds-m-left_x-small">
+            </lightning-button>
+         </footer>
+       </div>
+     </section>
+   </template>
+  </div>     
+<!-- modal end -->
+      
+    
+</template>

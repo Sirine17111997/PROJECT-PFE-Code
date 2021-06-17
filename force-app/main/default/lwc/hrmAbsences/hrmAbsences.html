@@ -45,23 +45,20 @@
            
         </lightning-layout>
     </template>
-    <template if:true={ishelpItemMenu}>
+    <template if:true={isAbsenceManagerItemMenu}>
         <lightning-layout horizontalalign="spread" multiplerows="true">
         
-            <lightning-layout-item lightning-layout-item flexibility="grow" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:183px;" >
-                <p>The help Page is Under Construction...</p>
-                   
+            <lightning-layout-item lightning-layout-item flexibility="grow" size= "8" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:183px;" >
+             <c-newbutton-absence-manager></c-newbutton-absence-manager>
              </lightning-layout-item>
+            <lightning-layout-item flexibility="grow" size="6" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:175px;">
+                <div class="chartt">
+                
+                </div>
+            </lightning-layout-item>
        
         </lightning-layout>
     </template>
-    <template if:true={isSetupItemMenu}>
-        <lightning-layout horizontalalign="spread" multiplerows="true">
-        <lightning-layout-item lightning-layout-item flexibility="grow" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:183px;" >
-            <p>The Setup Page is Under Construction...</p>
-               
-         </lightning-layout-item>
-        </lightning-layout>
-    </template>
+    
   
 </template>

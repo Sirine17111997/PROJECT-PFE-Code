@@ -5,7 +5,7 @@ import { CurrentPageReference } from 'lightning/navigation';//to create a deep l
 export default class HrmAbsences extends LightningElement {
     @track isAbsenceItemMenu=true;
     @track isSetupItemMenu =false;
-    @track ishelpItemMenu=false;
+    @track isAbsenceManagerItemMenu=false;
     @track absenceId ;
     @track isAbsence;
     @track isAbsenceManager;
@@ -33,7 +33,7 @@ export default class HrmAbsences extends LightningElement {
         switch(itemMenuSelected){
             case 'absences':{
                  this.isAbsenceItemMenu=true;
-                 this.ishelpItemMenu=false;
+                 this.isAbsenceManagerItemMenu=false;
                  this.isItemMenudashboard=false;
              
                  this.isSetupItemMenu =false;
@@ -41,19 +41,19 @@ export default class HrmAbsences extends LightningElement {
             case 'dashboard':{
                 this.isAbsenceItemMenu=false;
                 this.isItemMenudashboard=true;
-                this.ishelpItemMenuu=false;
-                this.isSetupItemMenu =false;
+                this.isAbsenceManagerItemMenu=false;
+              
            }break;
-           case 'help':{
+           case 'AbsenceManager':{
                 this.isAbsenceItemMenu=false;
-                this.ishelpItemMenu=true;
+                this.isAbsenceManagerItemMenu=true;
                 this.isItemMenudashboard=false;
-                this.isSetupItemMenu =false;
+               
             }break;
             case 'setup':{
                 this.isAbsenceItemMenu=false;
-                this.ishelpItemMenu=false;
-                this.isSetupItemMenu =true;
+                this.isAbsenceManagerItemMenu=false;
+             
                 this.isItemMenudashboard=false;
             }break;
 

@@ -1,9 +1,9 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import { loadScript, loadStyle } from 'lightning/platformResourceLoader';
 import FullCalendar from '@salesforce/resourceUrl/FullCalendarJS';
-import getUserHolidays from '@salesforce/apex/EventsAPI.getUserHolidays';
+
 import getAllAbsences from '@salesforce/apex/EventsAPI.getAllAbsences';
-import getEventsCategories from '@salesforce/apex/EventsAPI.getEventsCategories';
+
 //Use the Lightning message service functions to communicate over a Lightning message channel(is not a component).
 //Use Lightning message service to communicate across the DOM between lighnting web components.
 //Lightning Message service is a way to communicate between Lightning Web Components (LWC), Aura Components, and, yes, even Visualforce Pages. The new capability is called Lightning Message Service.
@@ -126,6 +126,7 @@ export default class FullcalendarJStest extends LightningElement {
                   start: o.date__c,
                   end: o.date__c,
                   title: o.holidayName__c,
+                  Email:o.Email__c,
                   editable: false,
                   color: '#777777',
                 })

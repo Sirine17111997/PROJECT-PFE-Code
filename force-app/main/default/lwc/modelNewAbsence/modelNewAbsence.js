@@ -33,7 +33,7 @@ fields = [
        Certificate__c,
        DangerToEmployees__c,
        AbsenceManager__c,
-       Email__c
+       Email__c,
    ];
 
     
