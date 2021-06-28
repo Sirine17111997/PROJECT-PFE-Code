@@ -80,33 +80,18 @@ public static void rejectAbsenceApproval(List<Id> absID){
 @AuraEnabled(cacheable=true)
 public static List<AggregateResult> getabsenceManagerrr(){
 	return [select COUNT(id) num , Name FROM AbsenceManager__c GROUP BY Name];}
-	@AuraEnabled(cacheable=true)
+@AuraEnabled(cacheable=true)
 public static List<AbsenceManager__c> getAbsenceManager(){
-	return [select ID, Name, Email__c FROM AbsenceManager__c];}
+	return [select  Name, Email__c ,phone__c FROM AbsenceManager__c];}
+//Search keyworld from datatable of AbsenceManager
+@AuraEnabled(cacheable=true)
+	public static List<AbsenceManager__c> getAbsManager( String searchKey) {
+		String strKey = '%' + searchKey + '%';  
+        return [ SELECT Id, Name FROM AbsenceManager__c WHERE Name LIKE: strKey];  
+}
+@AuraEnabled(cacheable=true)
+public static List<AggregateResult> getabsenceManagerchart(){
+return [select COUNT(Name) num , AbsenceManager__r.Name abs FROM Absence__c WHERE StartDate__c>=:system.today() AND StartDate__c<=:system.today()+7  GROUP BY  AbsenceManager__r.Name];}
 
-public class relatedFile {
-        public String PathOnClient;
-        public String Title;
-        public Blob VersionData;
-    }
 
-    @AuraEnabled
-    public static boolean uploadFiles(List<Map<String, Object>> files){
-        Boolean isSuccess = false;
-        List<ContentVersion> relatedDocuments = new List<ContentVersion>();
-        for (Map<String, Object> file : files) {
-            String fileJson = JSON.serialize(file);
-            relatedFile relatedDocument = (relatedFile) JSON.deserialize(fileJson, relatedFile.class);
-            ContentVersion contentVersionFile = new ContentVersion();
-            contentVersionFile.PathOnClient = relatedDocument.PathOnClient;
-            contentVersionFile.Title = relatedDocument.Title;
-            contentVersionFile.VersionData = relatedDocument.VersionData;
-            relatedDocuments.add(contentVersionFile);
-        }
-        Database.saveResult[] srFiles = Database.insert(relatedDocuments);
-        for (Database.SaveResult saveResult : srFiles) {
-            isSuccess = saveResult.isSuccess();
-        }
-        return isSuccess;
-    }
 }

@@ -6,9 +6,10 @@
     <lightning-button variant="brand-outline"
     label="New Absence Manager" onclick={openModal} slot="actions" class="slds-m-left_x-small">
    </lightning-button>
+   <div class="slds-var-m-top_large">
     <c-listof-absence-manager ></c-listof-absence-manager><!--OK-->
- 
-    </lightning-card>
+    </div>
+ </lightning-card>
     <!-- modal start -->   
     <div>
      <template if:true={showModal}>

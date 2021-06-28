@@ -11,8 +11,6 @@ export default class CalendarWrapper extends LightningElement {
     }
 
     reloadCalendar(e) {
-        let evts = Object.values(e.detail || {}) || []
-        this.template.querySelector('c-full-calendar-js').filterEvents(evts)
     }
 
     handleToggleCalendar() {
@@ -21,7 +19,7 @@ export default class CalendarWrapper extends LightningElement {
 
 
     handleToggleCalendarWeekend() {
-        this.template.querySelector('c-full-calendar-js').toggleWeekend()
+        this.template.querySelector('c-full-calendar').toggleWeekend()
     }
 
     //evts is array of colors

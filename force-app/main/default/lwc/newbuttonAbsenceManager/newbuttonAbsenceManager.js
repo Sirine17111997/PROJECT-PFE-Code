@@ -2,11 +2,10 @@ import { LightningElement,track,wire,api } from 'lwc';
 import AbsenceManager__c from '@salesforce/schema/AbsenceManager__c';
 import Name from '@salesforce/schema/Absence__c.Name';
 import Email__c from '@salesforce/schema/AbsenceManager__c.Email__c';
+import Phone__c from '@salesforce/schema/AbsenceManager__c.Phone__c';
 import Employee__c from '@salesforce/schema/AbsenceManager__c.Employee__c';
 import { publish, MessageContext } from 'lightning/messageService';
 import SampleMC from '@salesforce/messageChannel/SampleMC__c';
-
-
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 
@@ -27,8 +26,9 @@ objectApiName = AbsenceManager__c;
 @track showModal = false;
 fields = [
       Name,
+      Employee__c,
       Email__c,
-      Employee__c
+      Phone__c,
   ];
 
 
@@ -47,7 +47,7 @@ handleSuccess(event) {
    });
    this.dispatchEvent(evt);
    this.closeModal();
-   this.template.querySelector('c-absence-for-approval').handleSuccess();
+   this.template.querySelector('c-listof-absence-manager').handleSuccess();
    
 
 

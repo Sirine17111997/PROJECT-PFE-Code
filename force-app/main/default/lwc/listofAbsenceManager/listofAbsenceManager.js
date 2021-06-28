@@ -1,5 +1,6 @@
 import { LightningElement  ,track,api,wire } from 'lwc';
 import getAbsenceManager from '@salesforce/apex/AbsenceController.getAbsenceManager';
+import getAbsManager from '@salesforce/apex/AbsenceController.getAbsManager';
 import { deleteRecord } from "lightning/uiRecordApi";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import {refreshApex} from '@salesforce/apex';
@@ -11,26 +12,28 @@ const actions = [
 ];
 
 export default class ListofAbsenceManager extends  NavigationMixin(LightningElement) {
-    @track columns;
+@track columns;
 @track showModal = false;
-
+@track value;
+@api sortedDirection = 'asc';
+@api sortedBy = 'Name';
+@api searchKey = '';
 Name="Name"
 Email='Email__c';
+phone="Phone__c"
 
-columns =[
- 
+ columns =[
+   
     {
          type: 'text',
          fieldName: this.Name,
          label: 'Name  '
    },
-   { label: 'Email', fieldName:this.Email, type: 'Email' },
-   
-    {
-       type: 'action',
-       typeAttributes: { rowActions: actions }}
-   
-   ];
+   { label: 'Email', fieldName:this.Email, type: 'email' , sortable: true },
+   { label: 'Phone', fieldName:this.phone, type: 'phone' , sortable: true },
+   {
+    type: 'action',
+    typeAttributes: { rowActions: actions }}];
 @track showModal=false;
 @track error;
 pagelinks = [];
@@ -39,7 +42,7 @@ pagelinks = [];
 @track data = []; 
 @track startingRecord = 1;
 @track endingRecord = 0; 
-@track pageSize =14; 
+@track pageSize =12; 
 @track totalRecountCount = 0;
 @track totalPage = 0;
 @track showLoadingSpinner=false;
@@ -66,7 +69,11 @@ getAbsenceManager(result) {
         this.data = undefined;
     }
 }
-
+//sucess function
+@api
+handleSuccess() {
+    return refreshApex(this.refreshTable);
+}
 //clicking on previous button this method will be called
 previousHandler() {
     if (this.page > 1) {
@@ -117,7 +124,12 @@ disableEnableActions() {
             }
         });
     }
-handleRowAction(event) {
+
+handleKeyChange( event ) {
+        this.searchKey = event.target.value;
+        this.handleSuccess();
+}  
+callRowAction(event) {
     const actionName = event.detail.action.name;
     const row = event.detail.row;
     console.log('Row --> ' + JSON.stringify(row));//JSON.stringify() converts a javascript value to a JSON String 
@@ -151,7 +163,8 @@ if (index !== -1) {
     }));
 
     // refreshing table data using refresh apex
-    return refreshApex(this.refreshTable);
+    this.handleSuccess();
+   location.reload();
 })
 .catch(error => {
     this.dispatchEvent(new ShowToastEvent({
@@ -185,9 +198,29 @@ showdetail(row){
 closeModal() {
     // to close modal window set 'bShowModal' tarck value as true
     this.showModal = false;
-    return refreshApex(this.refreshTable);
- }
+    this.handleSuccess();
  
+}
+handleKeyChange( event ) {  
+          
+    const searchKey = event.target.value;  
 
+    if ( searchKey ) {  
+
+        getAbsManager( { searchKey } )    
+        .then(result => {  
+
+            this.data = result;  
+            this.handleSuccess();
+        })  
+        .catch(error => {  
+
+            this.error = error;  
+          
+        });  
+
+    } else  
+    this.data= undefined;  
+}      
 
 }

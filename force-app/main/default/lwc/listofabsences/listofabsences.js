@@ -31,7 +31,7 @@ export default class Listofabsences extends NavigationMixin(LightningElement) {
 @track columns;
 @track showModal = false;
 
-Name="Name"
+Name="Name";
 startdate='StartDate__c';
 Enddate='EndDate__c';
 columns =[
@@ -203,6 +203,7 @@ closeModal() {
     // to close modal window set 'bShowModal' tarck value as true
     this.showModal = false;
     return refreshApex(this.refreshTable);
+    
  }
  
 

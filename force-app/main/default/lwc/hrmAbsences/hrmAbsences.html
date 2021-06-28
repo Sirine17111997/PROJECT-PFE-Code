@@ -3,12 +3,13 @@
         
         <lightning-layout horizontalalign="spread" multiplerows="true">
         
-            <lightning-layout-item flexibility="grow" size="7" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:183px;" >
+            <lightning-layout-item flexibility="auto" size="7" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:183px;" >
                 
                 <c-calendar-wrapper></c-calendar-wrapper>
                 
             </lightning-layout-item>
-            <lightning-layout-item flexibility="grow" size="6" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:175px;">
+            <lightning-layout-item flexibility="autoo
+            " size="6" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:175px;">
                 <div class="container">
                 <c-new-absence-button-model></c-new-absence-button-model>
                 <div style="margin-left:1px; margin-top:6px;" >
@@ -48,13 +49,17 @@
     <template if:true={isAbsenceManagerItemMenu}>
         <lightning-layout horizontalalign="spread" multiplerows="true">
         
-            <lightning-layout-item lightning-layout-item flexibility="grow" size= "8" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:183px;" >
+            <lightning-layout-item lightning-layout-item flexibility="grow" size= "12" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:183px;" >
+                <div class='AbsenceManager'>
              <c-newbutton-absence-manager></c-newbutton-absence-manager>
+            </div>
              </lightning-layout-item>
-            <lightning-layout-item flexibility="grow" size="6" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:175px;">
+             <lightning-layout-item flexibility="grow" size="6" mediumdevicesize="10" largedevicesize="10" style="margin-left:-5px; position:relative;right:260px;">
                 <div class="chartt">
                 
-                </div>
+            
+            </div>
+               
             </lightning-layout-item>
        
         </lightning-layout>
